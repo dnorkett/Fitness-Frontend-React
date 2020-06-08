@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { API_URL } from './api';
 
 export default class EditEntry extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class EditEntry extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/exercises/'+ this.props.match.params.id)
+    axios.get(API_URL + 'exercises/'+ this.props.match.params.id)
       .then(response => {
         this.setState({
           username: response.data.username,
@@ -38,7 +39,7 @@ export default class EditEntry extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:5000/users/')
+    axios.get(API_URL + 'users/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -50,7 +51,7 @@ export default class EditEntry extends Component {
         console.log(error);
       })
 
-      axios.get('http://localhost:5000/calories')
+      axios.get(API_URL + 'calories')
       .then(res => {
           if (res.data.length > 0) {                    
               this.setState({
@@ -111,7 +112,7 @@ export default class EditEntry extends Component {
     }
 
     
-    axios.post('http://localhost:5000/exercises/update/' + this.props.match.params.id, exercise)
+    axios.post(API_URL + 'exercises/update/' + this.props.match.params.id, exercise)
       .then(res => console.log(res.data));
 
     window.location = '/';          //back to home

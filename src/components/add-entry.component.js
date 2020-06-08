@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
+import { API_URL } from './api';
+
+console.log(API_URL)
 
 export default class AddEntry extends Component {
     constructor(props) {
@@ -26,7 +29,7 @@ export default class AddEntry extends Component {
 
 
     componentDidMount() {
-        axios.get('http://localhost:5000/users')
+        axios.get(API_URL + 'users')
             .then(res => {
                 if (res.data.length > 0) {
                     this.setState({
@@ -36,7 +39,7 @@ export default class AddEntry extends Component {
                 }
             });
 
-        axios.get('http://localhost:5000/calories')
+        axios.get(API_URL + 'calories')
             .then(res => {
                 if (res.data.length > 0) {                    
                     this.setState({
@@ -101,7 +104,7 @@ export default class AddEntry extends Component {
         }
 
         
-        axios.post('http://localhost:5000/exercises/add', exercise)
+        axios.post(API_URL + 'exercises/add', exercise)
         .then(res => console.log(res.data));
 
         window.location = '/';          //back to home

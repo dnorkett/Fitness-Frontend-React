@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { API_URL } from './api';
 import axios from 'axios';
 
 const Activity = props => (
@@ -32,7 +33,7 @@ export default class CreateActivity extends Component {
 
 
     componentDidMount() {
-        axios.get('http://localhost:5000/calories/')
+        axios.get(API_URL + 'calories/')
             .then(res => {
                 this.setState({activities: res.data})
             })
@@ -61,7 +62,7 @@ export default class CreateActivity extends Component {
             caloriesPerHour: this.state.caloriesPerHour
         }
         
-        axios.post('http://localhost:5000/calories/add', calories)
+        axios.post(API_URL + 'calories/add', calories)
             .then(res => console.log(res.data));
 
         this.setState({
@@ -72,7 +73,7 @@ export default class CreateActivity extends Component {
 
 
     deleteActivity(id) {
-        axios.delete('http://localhost:5000/calories/' + id)
+        axios.delete(API_URL + 'calories/' + id)
             .then(res => console.log(res.data));
 
         this.setState({
